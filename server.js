@@ -12,7 +12,7 @@
 
 
 require('dotenv').config();
-const commands = require('./commands');
+const tools = require('./tools');
 const tmi = require('tmi.js')
 
 const client = new tmi.Client({
@@ -39,8 +39,13 @@ client.on('message', async (channel, context, message, self) => {
 
     // ignore not command message (start with !)
     if (!message.startsWith('!')) return;
-
-    commands.handle(channel, commands.parseCmdArg(message) );
+    
+    var [cmd, args] = tools.parseCmdArg(message);
+    if (cmd === 'echo' ) {
+        // response to chat
+        client.say(channel, `@${context.username}, you said: "${args.join(' ')}"`);
+    }
+    
 
 });
 
