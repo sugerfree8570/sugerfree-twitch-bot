@@ -1,6 +1,5 @@
 
 module.exports = {
-
     /**
      * parse arg and commands
      * @param {*} msg 
@@ -11,6 +10,6 @@ module.exports = {
         const cmd = args.shift().toLowerCase();
         return [cmd, args];
     }
-    
+
 };
 
